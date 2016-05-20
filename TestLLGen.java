@@ -3,11 +3,11 @@ public class TestLLGen{
 	public static void main(String[] args) {
 
 		//Delete All
-		LinkedListGen<Integer> ll = new LinkedListGen<Integer>();
-		ll.newNodeFromArray(new Integer[]{1, 1, 1, 30, 11 });
-		println("\nDeleting All: 1");	
+		LinkedListGen<Character> ll = new LinkedListGen<Character>();
+		ll.newNodeFromArray(new Character[]{'a', 'b', 'c', 'b' });
+		println("\nDeleting All: b");	
 		ll.printList();
-		ll.deleteAll(1);
+		ll.deleteAll('b');
 		ll.printList();	
 
 		//Delete
