@@ -51,6 +51,38 @@ public class TestLL{
 		llremMid.printList();
 		llremMid.removeMidNode(nDel);
 		llremMid.printList();
+
+		//kth To Last Element
+		LinkedList llkToLast = new LinkedList();
+		llkToLast.newNodeFromArray(new int[]{1, 2, 4, 6, 1, 8, 5, 0, 45, 87, 9});
+		println("\nFind 2rd last elem" );				
+		llkToLast.printList();
+		LinkedList.Node k =  llkToLast.kthToLast(6);
+		println(k.data + "");
+
+		//partition around given valvue v
+		//All less than v on left, all greater than equal to v on right
+		LinkedList llpart = new LinkedList();
+		llpart.newNodeFromArray(new int[]{1, 2, 4, 6, 1, 8, 5, 0, 45, 87, 9});
+		int v = 5;
+		println("\npartition around given value v=" +  v);				
+		llpart.printList();
+		llpart.partition(v);
+		llpart.printList();
+
+
+		//is the linkedList a palindrome
+		LinkedList llPalin = new LinkedList();
+		// llPalin.newNodeFromArray(new int[]{1, 2, 2, 1});
+		llPalin.newNodeFromArray(new int[]{1, 2, 4, 6, 1, 6, 4, 2, 1});
+
+		print("\nisPalindrome  " );
+		llPalin.printList();
+		boolean isPalin = llPalin.isPalindrome();
+		println(isPalin + "");				
+
+
+
 		
 
 	}
