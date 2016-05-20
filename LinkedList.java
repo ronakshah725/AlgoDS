@@ -370,6 +370,7 @@ public class LinkedList {
 
 	/*
 	7. isPalindrome()
+	Technique 1:
 		Logic:	a -> ... -> x -> ... l 
 		1. find mid, x
 		2. reverse from  mid, l->x  
@@ -380,6 +381,13 @@ public class LinkedList {
 		1. Dont want to include the mid node if length is odd abcba when comparing the two strings
 		2. For even: [abba] l1: ab, l2: ba 
 		3. For odd: [abcba] l1: abc, l2: ba
+
+	Technique 2:
+	Stack based
+	1. Reach till mid with fast slow
+	2. Add elements from mid.next into a stack till u reach end
+	3. Now compare og list head and stack top to equality
+	4. Do unitl no elements in the stack
 
 
 	 */
@@ -475,6 +483,60 @@ public class LinkedList {
 			n = next;
 		}
 		return prev; 							// new head;
+	}
+
+	/*
+	
+		8. Sort a Linked List of 0s, 1s and 2s
+		Given a Singly linked list with each node containing either 0, 1 or 2. Write code to sort the list.
+		Input : 1 -> 1 -> 2 -> 0 -> 2 -> 0 -> 1 -> 0
+		Output : 0 -> 0 -> 0 -> 1 -> 1 -> 1 -> 2 -> 2
+
+		Solution:
+		You can do that in O(n).
+
+		/*
+		
+			Traverse the linked list from the beginning and count the number of 0s, 1s and 2s. (Let the counts be p, q, r)
+			Now traverse the linked list again and set first p nodes to 0, q nodes to 1 and r nodes to 2.
+	
+	*/
+	 
+	 
+	
+	void sortLLWithOnly0s_1s_2s(){
+
+		if (head == null || head.next == null)
+			return ;
+		
+		int zeros = 0, ones = 0, twos = 0;
+
+		Node n = head;
+
+		while(n != null){
+
+			if(n.data == 0)
+				zeros++;
+			else if(n.data == 1)
+				ones++;
+			else
+				twos++;
+			n = n.next;
+		}
+		n = head;   //0 2 1  2 2 1 0 1 1
+		while(true){
+			if(--zeros >= 0)
+				n.data = 0;
+			else if( --ones >= 0 )
+				n.data = 1;
+			else if( --twos >= 0)
+				n.data = 2;
+			else
+				break;
+			n = n.next;
+
+		}
+
 	}
 
 

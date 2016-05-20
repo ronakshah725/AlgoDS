@@ -73,14 +73,20 @@ public class TestLL{
 
 		//is the linkedList a palindrome
 		LinkedList llPalin = new LinkedList();
-		// llPalin.newNodeFromArray(new int[]{1, 2, 2, 1});
 		llPalin.newNodeFromArray(new int[]{1, 2, 4, 6, 1, 6, 4, 2, 1});
-
 		print("\nisPalindrome  " );
 		llPalin.printList();
 		boolean isPalin = llPalin.isPalindrome();
 		println(isPalin + "");				
 
+		
+		LinkedList llsort012 = new LinkedList();
+		llsort012.newNodeFromArray(new int[]{0, 2, 1, 2, 2, 1, 0, 1, 1});
+		println("\n Sort a Linked List of 0s, 1s and 2s  " );
+		llsort012.printList();
+		llsort012.sortLLWithOnly0s_1s_2s();
+		llsort012.printList();
+		
 
 
 		
