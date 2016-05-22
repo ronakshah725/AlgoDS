@@ -1,14 +1,14 @@
 import java.util.*;
 
-public class LinkedList {
+public class LinkedListGeneric<T> {
 	public boolean DEBUG = false;
-	private Node head;
+	private Node<T> head;
 
 	/*
 	 * Head Getter
 	 */
 
-	public Node getHead() {
+	public Node<T> getHead() {
 
 		return head;
 	}
@@ -17,24 +17,24 @@ public class LinkedList {
 	 * Head Setter
 	 */
 
-	public void setHead(Node head) {
+	public void setHead(Node<T> head) {
 
 		this.head = head;
 	}
 
-	class Node {
+	class Node<T> {
 
-		int data;
-		Node next;
+		T data;
+		Node<T> next;
 
-		Node(int data) {
+		Node(T data) {
 			this.data = data;
 			this.next = null;
 		}
 
 		@Override
 		public String toString() {
-			return "Node [data=" + data + "]";
+			return "Node<T> [data=" + data + "]";
 		}
 	}
 
@@ -44,31 +44,14 @@ public class LinkedList {
 	 * Append a new Node to the tail
 	 */
 
-	void appendToTail(int d) {
-		Node n = new Node(d);
+	void appendToTail(T d) {
+		Node<T> n = new Node<T>(d);
 		if (head == null) {
 			head = n;
 			return;
 		}
 
-		Node current = head;
-		while (current.next != null) {
-			current = current.next;
-		}
-		current.next = n;
-	}
-
-	 /* 
-	 	Append a new Node to the tail
-	 */
-
-	void appendToTail(Node n) {
-		if (head == null) {
-			head = n;
-			return;
-		}
-
-		Node current = head;
+		Node<T> current = head;
 		while (current.next != null) {
 			current = current.next;
 		}
@@ -79,35 +62,22 @@ public class LinkedList {
 	 * Create a new LinkedList from given int array
 	 */
 
-	void newNodeFromArray(int[] arr) {
+	void newNodeFromArray(T[] arr) {
 
-		this.head = new Node(arr[0]);
-		Node n = this.head;
+		this.head = new Node<T>(arr[0]);
+		Node<T> n = this.head;
 		for (int i = 1; i < arr.length; i++) {
-			n.next = new Node(arr[i]);
+			n.next = new Node<T>(arr[i]);
 			n = n.next;
 		}
 	}
 
 	/*
-	 * Append a new Node to the front or head
+	 * Append a new Node<T> to the front or head
 	 */
 
-	void appendToFront(int data) {
-		Node n = new Node(data);
-		if (head == null) {
-			head = n;
-			return;
-		}
-		n.next = head;
-		head = n;
-	}
-
-	/*
-	 * Append a new Node to the front or head
-	 */
-
-	void appendToFront(Node n) {
+	void appendToFront(T data) {
+		Node<T> n = new Node<T>(data);
 		if (head == null) {
 			head = n;
 			return;
@@ -127,7 +97,7 @@ public class LinkedList {
 			System.out.println(" -> ");
 			return;
 		}
-		Node current = head;
+		Node<T> current = head;
 		while (current != null) {
 			System.out.print(current.data + " -> ");
 			current = current.next;
@@ -135,14 +105,14 @@ public class LinkedList {
 		System.out.println();
 	}
 
-	void printList(String msg, Node head) {
+	void printList(String msg, Node<T> head) {
 
 		System.out.print(msg);
 		if (head == null) {
 			System.out.println(" -> ");
 			return;
 		}
-		Node current = head;
+		Node<T> current = head;
 		while (current != null) {
 			System.out.print(current.data + " -> ");
 			current = current.next;
@@ -150,7 +120,7 @@ public class LinkedList {
 		System.out.println();
 	}
 
-	int length(Node curr) {
+	int length(Node<T> curr) {
 
 		if (curr == null)
 			return 0;
@@ -180,13 +150,13 @@ public class LinkedList {
 	// 1->2->3->3->2->1
 	// 
 	
-	Node getMid(){
+	Node<T> getMid(){
 
 		if(head == null || head.next ==null)
 			return head;
 
-		Node fast = head;
-		Node slow = head;
+		Node<T> fast = head;
+		Node<T> slow = head;
 
 		while(fast.next!= null){
 			if(fast.next.next != null ){
@@ -207,7 +177,7 @@ public class LinkedList {
 	 * delete from heads seperately
 	 */
 
-	Node delete(int data) {
+	Node<T> delete(T data) {
 
 		// if the first node
 		if (head.data == data) {
@@ -215,8 +185,8 @@ public class LinkedList {
 			return head;
 		}
 		// if the middle or last node
-		Node prev = head;
-		Node current = head.next;
+		Node<T> prev = head;
+		Node<T> current = head.next;
 
 		while (current != null) {
 			if (current.data == data) {
@@ -233,15 +203,15 @@ public class LinkedList {
 	 * 3. Delete all occurrences and returns the head
 	 */
 
-	void deleteAll(int data) {
+	void deleteAll(T data) {
 
 		// Delete all first occurrences
 		while (head.data == data) {
 			head = head.next;
 		}
 		// if the middle or last node
-		Node prev = head;
-		Node current = head;
+		Node<T> prev = head;
+		Node<T> current = head;
 
 		while (current != null) {
 			if (current.data == data) {
@@ -262,10 +232,10 @@ public class LinkedList {
 		if (head == null || head.next == null)
 			return; // only 0 or 1 elements
 
-		Node n = head;
-		Node prev = null; // since previous to the first node will be null in the reversed linkedList
+		Node<T> n = head;
+		Node<T> prev = null; // since previous to the first node will be null in the reversed linkedList
 
-		Node next = head;
+		Node<T> next = head;
 
 		while (n != null) {
 
@@ -285,9 +255,9 @@ public class LinkedList {
 
 	void removeDups() {
 
-		Set<Integer> set = new HashSet<>();
-		Node n = head;
-		Node prev = head;
+		Set<T> set = new HashSet<>();
+		Node<T> n = head;
+		Node<T> prev = head;
 
 		while (n != null) {
 			if (!set.contains(n.data)) {
@@ -315,7 +285,7 @@ public class LinkedList {
 			n.next (ie. c) = n.next.next;
  */
 
-	void removeMidNode(Node n){
+	void removeMidNode(Node<T> n){
 			if(n == null || n.next == null || n == head) //cant be a null, or last or first node
 				return;
 			n.data = n.next.data;
@@ -340,12 +310,12 @@ public class LinkedList {
 		3.Then move n till offset reacges end
 	 */
 
-	Node kthToLast(int k){
+	Node<T> kthToLast(int k){
 		if(head == null ) return null;
 		if(head.next == null ) {
 			return head;}
-		Node n = head;
-		Node offset = head;
+		Node<T> n = head;
+		Node<T> offset = head;
 		while(k > 0){
 			offset = offset.next;
 			k--;
@@ -379,7 +349,7 @@ public class LinkedList {
 			return ;
 		}
 
-		Node n = head, prev = head;
+		Node<T> n = head, prev = head;
 		while( n!= null){
 			if(n.data < v){
 				if(n == head) {
@@ -440,7 +410,7 @@ public class LinkedList {
 
 		//*** 1. get mid
 		
-		Node mid = getMid();							// 1->2, returns 1
+		Node<T> mid = getMid();							// 1->2, returns 1
 														// 1->2->1, returns 2  
 														// 1->2->2->1, returns first 2
 		if(DEBUG){
@@ -451,7 +421,7 @@ public class LinkedList {
 		
 		//*** 2. reversed l2 
 		
-		Node l2RevHead = reverseAndGetHead(mid.next); 	// dont include mid in the new list l2
+		Node<T> l2RevHead = reverseAndGetHead(mid.next); 	// dont include mid in the new list l2
 		
 
 		mid.next = null; 								//to mark end of l1
@@ -464,8 +434,8 @@ public class LinkedList {
 	
 		//*** 3. compare l1 and l2 s elements
 		
-		Node n1 = head;
-		Node n2 = l2RevHead;
+		Node<T> n1 = head;
+		Node<T> n2 = l2RevHead;
 
 		while(n2!=null ){
 			if(n2.data != n1.data){
@@ -497,12 +467,12 @@ public class LinkedList {
 	
 
 
-	Node reverseAndGetHead(Node head){
+	Node<T> reverseAndGetHead(Node<T> head){
 
 		if(head == null || head.next == null)
 			return head;
 
-		Node n = head, prev = null, next = head;
+		Node<T> n = head, prev = null, next = head;
 
 		while ( n != null ){
 
@@ -541,7 +511,7 @@ public class LinkedList {
 		
 		int zeros = 0, ones = 0, twos = 0;
 
-		Node n = head;
+		Node<T> n = head;
 
 		while(n != null){
 
@@ -568,133 +538,25 @@ public class LinkedList {
 		}
 	}
 
+	// int sumTwoLLReverse(Node<T> h1, Node<T> h2){
 
-////TODO
-/*	// 9. Add 327 + 789 , given both as reversed lists
-	// 
-	// 1 2 3
-	// 9 8 7
-	// 
-	// 1 2
-	// 9 8 7
-	// 
-	// 1 2 3
-	// 9 8
-	// 
-	Node sumTwoLLReverse(Node h1, Node h2){
+	// 	if (h1==null){
+	// 		if(h2==null)
+	// 			return 0;
+	// 		else {
+	// 			return h2.data;
+	// 		}
+	// 	}
+	// 	if (h2==null){
+	// 		if(h1==null)
+	// 			return 0;
+	// 		else {
+	// 			return h1.data;
+	// 		}
+	// 	}
 
-		int carry = 0;
-		Node n1 = h1, n2 = h2;
-		int sum = 0;
 
-		Node sumNode = null;
-		Node sumHead = sumNode;
-		while(n1!=null || n2 != null){
-			println("wsd");
-			// n1 dig exhausted
-			if(n1==null){
-				sum = n2.data + carry;
-				println("n1 null");
-
-			}
-			// n2 exhausted
-			else if(n2 == null){
-				sum = n1.data + carry;
-				println("n2 null");
-
-			}
-			// both there
-			else{
-				sum = n1.data + n2.data + carry;
-				println("both there = " + sum);
-
-			}
-
-			//Manage carry
-			if(sum/10>0)
-				carry = 1;
-			else{
-				carry = 0;
-			}
-
-			//Make new Node
-			Node n = new Node(sum%10);
-			if(sumNode == null){
-				sumNode = n;
-			}else{
-			sumNode.next = n;
-			sumNode = sumNode.next;
-			}
-			n1 = n1.next;
-			n2 = n2.next;
-			this.printList("Current Sum: ",  sumHead);
-		}
-		return sumHead;
-	}*/
-
-	/*
-	
-		10. Check if two linkedLists intersect by reference
-		
-		1-2-3 \
-				6 - 2 - 3
-		  4-5 /
-		Here 6 is the intersecting node, return it
-		Logic 1:
-		1. find lengths and store tail of both (if tail1!=tail2, no collission, return false asap) 
-		2. chop off the bigger list from the head to match bigger.length = smaller.length
-		3. Loop both together and return true if you get a collission when bigger == smaller
-		4.
-
-	 */
-	
-	Node intersection(Node h2){
-
-		if(this.head == null || h2 == null)
-			return null;
-		
-		Node n1 = head;
-		Node n2 = h2;
-
-		//get the length of both the lists
-		int l1 = length();
-		this.head = h2;
-		int l2 = length();
-		this.head = n1;
-
-		//find the bigger list
-		Node bigger = null;
-		Node smaller = null;
-		int diff = l2 - l1;
-
-		if(l2>l1){
-			bigger = n2;
-			smaller = n1;
-		}else{
-			bigger = n1;
-			smaller = n2;
-			diff = -diff;
-		}
-
-		if(DEBUG){
-			println("Diff : " + diff);
-		}
-
-		//chop off bigger lls extra nodes
-		while(--diff >= 0){
-			bigger = bigger.next;
-		}
-
-		//find the collissiojn
-		while(bigger!=null){
-			if(bigger == smaller){
-				return bigger;
-			}
-			bigger = bigger.next;
-			smaller = smaller.next;
-		}
-		return null;
-	}
+	// }
 
 
 	static void println(Object a){
@@ -702,7 +564,7 @@ public class LinkedList {
 	}
 
 	static void print(Object a){
-		System.out.print((String)a);
+		System.out.prT((String)a);
 	}
 
 

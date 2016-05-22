@@ -79,18 +79,76 @@ public class TestLL{
 		boolean isPalin = llPalin.isPalindrome();
 		println(isPalin + "");				
 
-		
+		// sort ll with only 0 or 1 or 2 
 		LinkedList llsort012 = new LinkedList();
 		llsort012.newNodeFromArray(new int[]{0, 2, 1, 2, 2, 1, 0, 1, 1});
 		println("\n Sort a Linked List of 0s, 1s and 2s  " );
 		llsort012.printList();
 		llsort012.sortLLWithOnly0s_1s_2s();
 		llsort012.printList();
+
+/*
+TODO
+ 
+		//
+		LinkedList ll1 = new LinkedList();
+		ll1.newNodeFromArray(new int[]{7,1,6});
+		LinkedList ll2 = new LinkedList();
+		ll2.newNodeFromArray(new int[]{5,2,9});
+		LinkedList llsumRev = new LinkedList();
+		println("\n Sum of Two linkedList numbers in reverse order" );
+		ll1.printList();
+		ll2.printList();
+		llsumRev.printList();
+		LinkedList.Node sumHead = llsumRev.sumTwoLLReverse(ll1.getHead(), ll2.getHead());
+		llsumRev.printList("Sum: ", sumHead);
+
+*/		
+		//Intersection
+		intersection();
+
+
+
+
+
+
+
+
+
 		
 
+	}
+	static void intersection(){
+		//Test: create nodes for 1
 
-		
-
+		LinkedList llInter1 = new LinkedList();
+		llInter1.DEBUG = true;
+		llInter1.appendToTail(3);
+		llInter1.appendToTail(1);
+		llInter1.appendToTail(5);
+		llInter1.appendToTail(9);
+		llInter1.appendToTail(7);
+		llInter1.appendToTail(2);
+		llInter1.appendToTail(1);
+		LinkedList.Node intersectingNode = llInter1.getHead().next.next.next.next;
+		println("\nIntersection: " + intersectingNode.data);
+		llInter1.printList("ll1: ",llInter1.getHead());
+		LinkedList llInter2 = new LinkedList();
+		llInter2.appendToTail(4);
+		llInter2.appendToTail(6);
+		llInter2.appendToTail(intersectingNode);
+		llInter2.printList("ll2: ",llInter2.getHead());
+		LinkedList llInter3 = new LinkedList();
+		llInter3.appendToTail(3);
+		llInter3.appendToTail(1);
+		llInter3.appendToTail(5);
+		llInter3.appendToTail(9);
+		llInter3.appendToTail(7);
+		llInter3.printList("ll3: ",llInter3.getHead());
+		LinkedList.Node foundIntersectingNode12 = llInter1.intersection(llInter2.getHead());
+		println("Found Intersection 1,2: " + foundIntersectingNode12.data);
+		LinkedList.Node foundIntersectingNode13 = llInter1.intersection(llInter3.getHead());
+		println("Found Intersection 1,3: " + (foundIntersectingNode13!=null?foundIntersectingNode13.data:"Not Found"));
 	}
 
 
