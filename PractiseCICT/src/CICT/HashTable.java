@@ -68,6 +68,11 @@ public class HashTable{
 		
 
 	class LinkedList {
+		@Override
+		public String toString() {
+			return "LinkedList [head=" + head + ", N=" + N + "]";
+		}
+
 		Node head;
 		int N;
 		
@@ -152,12 +157,12 @@ public class HashTable{
 
 	public static void main(String[] args) {
 		HashTable map = new HashTable();
-		map.put(1, 10);
+		map.put(1000101, 10);
 		map.put(2, 200);
 		map.put(3, 3000);
 		
-		System.out.println(map.containsKey(4));
+		System.out.println(map.containsKey(1000101));
 		System.out.println(map.get(3));
-
+	
 	}
 }
