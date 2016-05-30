@@ -1,4 +1,4 @@
-package tree;
+package CICT.tree;
 public class TreeNode<Key extends Comparable<Key>>{
 
 	TreeNode left;

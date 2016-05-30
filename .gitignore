@@ -1,2 +1,8 @@
 *.class
-/PractiseCICT/
+.metadata/
+.recommenders/
+PractiseCICT/.classpath
+PractiseCICT/.gitignore
+PractiseCICT/.project
+PractiseCICT/.settings/
+RemoteSystemsTempFiles/
