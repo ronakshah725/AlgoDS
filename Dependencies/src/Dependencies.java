@@ -33,7 +33,7 @@ public class Dependencies{
 		//S <- Set of all nodes with no incoming edges
 		LinkedList<Node> S = new LinkedList<>();
 		for(Node n : allNodes){
-			if(n.inEdges.size() == 0){
+			if(n.indegree == 0){
 				S.add(n);
 				System.out.print(n + " ");
 
@@ -62,10 +62,10 @@ public class Dependencies{
 				Edge e = it.next();
 				Node m = e.to;
 				it.remove();//Remove edge from n
-				m.inEdges.remove(e);//Remove edge from m
+				m.indegree--;//Remove edge from m
 
 				//if m has no other incoming edges then insert m into S
-				if(m.inEdges.isEmpty()){
+				if(m.indegree == 0){
 					S.add(m);
 				}
 				it.hasNext();
@@ -75,7 +75,7 @@ public class Dependencies{
 		//Check to see if all edges are removed
 		boolean cycle = false;
 		for(Node n : allNodes){
-			if(!n.inEdges.isEmpty()){
+			if(n.indegree != 0){
 				cycle = true;
 				break;
 			}
@@ -135,22 +135,29 @@ public class Dependencies{
 
 class Node{
 	public final String name;
-	public final HashSet<Edge> inEdges;
+	//public final HashSet<Edge> inEdges;
+	public int indegree;
+	public boolean isVisited;
+	
 	@Override
 	public String toString() {
 		return  name ;
 	}
+	
 	public final HashSet<Edge> outEdges;
 
 	public Node(String name) {
 		this.name = name;
-		inEdges = new HashSet<Edge>();
+		//inEdges = new HashSet<Edge>();
+		indegree = 0;
 		outEdges = new HashSet<Edge>();
+		isVisited = false;
 	}
 	public void addEdge(Node node){
 		Edge e = new Edge(this, node);
 		outEdges.add(e);
-		node.inEdges.add(e);
+		node.indegree++;
+		//node.inEdges.add(e);
 	}
 
 }
