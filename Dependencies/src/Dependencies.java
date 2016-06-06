@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Dependencies{
@@ -17,62 +20,45 @@ public class Dependencies{
 		//			System.out.println("Usage: Dependencies conf-file"); 
 		//			System.exit(1);
 		//		}
-		HashMap<String, Node> programs = readDependencies("dep2.conf");
-
-		LinkedList<Node> allNodes= new LinkedList<>(programs.values());
-//		printParallel(allNodes);
-//		System.exit(1);
-		topoSort(allNodes);
-
-
+		HashMap<String, Node> programs = readDependencies("dep.conf");
+		Set<Node> allNodes= new HashSet<Node>(programs.values());
+		int concurrencyLimit = 2;
+		printParallel(allNodes, concurrencyLimit);
 	}
 
-	private static void topoSort(LinkedList<Node> allNodes) {
-		ArrayList<Node> L = new ArrayList<Node>();
+	private static void printParallel(Set<Node> allNodes, int limit) {
+		System.out.println("Processing Order: ");
+		int count = 0;
+		int NoOfNodes = allNodes.size();
+		List<Node> inZeroNodes ;
 
-		//S <- Set of all nodes with no incoming edges
-		LinkedList<Node> S = new LinkedList<>();
-		for(Node n : allNodes){
-			if(n.indegree == 0){
-				S.add(n);
-				System.out.print(n + " ");
-
-			}
-		}
-		System.out.println();
-
-		//while S is non-empty do
-		while(!S.isEmpty()){
-			//System.out.println(S);
-			//remove a node n from S
-			
-			Iterator<Node> SIterator = S.iterator();
-			Node n = SIterator.next();
-			SIterator.remove();
-			//insert n into L
-			L.add(n);
-			
-			
-			//for each node m with an edge e from n to m do
-			Iterator<Edge> it = n.outEdges.iterator();
-//			if(!it.hasNext())
-				
-			while(it.hasNext()){
-				//remove edge e from the graph
-				Edge e = it.next();
-				Node m = e.to;
-				it.remove();//Remove edge from n
-				m.indegree--;//Remove edge from m
-
-				//if m has no other incoming edges then insert m into S
-				if(m.indegree == 0){
-					S.add(m);
+		while(count < NoOfNodes ){
+			inZeroNodes = new LinkedList<>();
+			boolean atLeastOne = false;
+			for(Node n : allNodes ){
+				if(n.indegree == 0 && !n.isVisited){
+					n.isVisited = true;
+					inZeroNodes.add(n);
+					System.out.print(n);
+					atLeastOne = true;
 				}
-				it.hasNext();
 			}
-
+			if(!atLeastOne) 
+				break;
+			System.out.println();
+			count++;
+			ListIterator<Node> iterator = inZeroNodes.listIterator();
+			while(iterator.hasNext()){
+				Node n = iterator.next();
+				for(Edge e : n.outEdges){						
+					e.to.indegree--;
+				}
+			}
 		}
-		//Check to see if all edges are removed
+		checkCycle(allNodes);		
+	}
+
+	private static void checkCycle(Set<Node> allNodes) {
 		boolean cycle = false;
 		for(Node n : allNodes){
 			if(n.indegree != 0){
@@ -80,18 +66,13 @@ public class Dependencies{
 				break;
 			}
 		}
-		if(cycle){
-			System.out.println("Cycle present, topological sort not possible");
-		}else{
-			System.out.println("Topological Sort: "+Arrays.toString(L.toArray()));
-		}
+		if(cycle)	
+			System.out.println("Cycle present, dependency ordering not possible !! ");
+		else
+			System.out.println("Done !!");
 	}
-
-	private static void printParallel(LinkedList<Node> allNodes) {
-		
-		
-	}
-
+	
+	
 	public static HashMap<String, Node>  readDependencies(String confFileName) throws IOException{
 		BufferedReader br;
 		br = new BufferedReader(new FileReader(confFileName));
@@ -105,23 +86,23 @@ public class Dependencies{
 			Matcher matcher = pattern.matcher(line);	
 			while (matcher.find()) {
 				String name = matcher.group(1).trim(); //
-				Node successor;
-				String[] predecessors = matcher.group(3).trim().split("[\\s]*,[\\s]*");
+				Node child;
+				String[] parents = matcher.group(3).trim().split("[\\s]*,[\\s]*");
 
 				if(!nodes.containsKey(name)){
-					successor = new Node(name);
-					nodes.put(name, successor);
+					child = new Node(name);
+					nodes.put(name, child);
 				}else{
-					successor = nodes.get(name);
+					child = nodes.get(name);
 				}
-				for(String p : predecessors){
+				for(String p : parents){
 
 					if(p.equals("")) continue;
 
 					Node parent = nodes.get(p);
 					if(parent==null)
 						parent = new Node(p);
-					parent.addEdge(successor);
+					parent.addEdge(child);
 					nodes.put(p, parent);
 				}
 			}
@@ -135,40 +116,39 @@ public class Dependencies{
 
 class Node{
 	public final String name;
-	//public final HashSet<Edge> inEdges;
 	public int indegree;
 	public boolean isVisited;
+
+	public final HashSet<Edge> outEdges;
+
+	public Node(String name) {
+		this.name = name;
+		indegree = 0;
+		outEdges = new HashSet<Edge>();
+		isVisited = false;
+	}
+	
+	public void addEdge(Node node){
+		Edge e = new Edge(this, node);
+		outEdges.add(e);
+		node.indegree++;
+	}
 	
 	@Override
 	public String toString() {
 		return  name ;
 	}
-	
-	public final HashSet<Edge> outEdges;
-
-	public Node(String name) {
-		this.name = name;
-		//inEdges = new HashSet<Edge>();
-		indegree = 0;
-		outEdges = new HashSet<Edge>();
-		isVisited = false;
-	}
-	public void addEdge(Node node){
-		Edge e = new Edge(this, node);
-		outEdges.add(e);
-		node.indegree++;
-		//node.inEdges.add(e);
-	}
-
 }
 
 class Edge{
 	public final Node from;
 	public final Node to;
+	
 	public Edge(Node from, Node to) {
 		this.from = from;
 		this.to = to;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Edge e = (Edge)obj;
@@ -177,22 +157,3 @@ class Edge{
 
 
 }
-
-/*
-	Assumptions: 
-	1. No cycles, else stop
-	2. Stop if 
-	3. No Duplicates
-
-	Steps:
-
-	1. Make conf file:
-
-			A : ,
-			B : A
-			C : A
-			D : A,B
-			E : B,C,D
-
-			A ->BCD -> E
- */
