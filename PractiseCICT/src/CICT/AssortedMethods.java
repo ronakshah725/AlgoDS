@@ -1,6 +1,4 @@
 package CICT;
-import java.util.*;
-import java.awt.*;
 
 public class AssortedMethods {
 	public static int randomInt(int n) {
@@ -37,4 +35,8 @@ public class AssortedMethods {
 		return array;
 	}
 
+<<<<<<< HEAD
  }
+=======
+ }
+>>>>>>> playground
