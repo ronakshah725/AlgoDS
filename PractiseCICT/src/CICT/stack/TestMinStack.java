@@ -6,7 +6,7 @@ import CICT.AssortedMethods;
 
 
 
-public class TestMyStack{
+public class TestMinStack{
 
 public static void main(String[] args) {
 		int[] array = AssortedMethods.randomArray(10, 0, 500);
