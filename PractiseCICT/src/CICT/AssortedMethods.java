@@ -35,8 +35,5 @@ public class AssortedMethods {
 		return array;
 	}
 
-<<<<<<< HEAD
+ 
  }
-=======
- }
->>>>>>> playground
