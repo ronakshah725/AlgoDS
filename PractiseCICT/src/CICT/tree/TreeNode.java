@@ -1,3 +1,5 @@
+package CICT.tree;
+
 public class TreeNode{
 
 	TreeNode left;
