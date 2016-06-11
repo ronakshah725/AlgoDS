@@ -1,4 +1,4 @@
-package CICT;
+
 
 import java.util.*;
 
@@ -24,10 +24,10 @@ public class LinkedList {
 		this.head = head;
 	}
 
-	class Node {
+	public class Node {
 
-		int data;
-		Node next;
+		public int data;
+		public Node next;
 
 		Node(int data) {
 			this.data = data;
@@ -46,7 +46,7 @@ public class LinkedList {
 	 * Append a new Node to the tail
 	 */
 
-	void appendToTail(int d) {
+	public void appendToTail(int d) {
 		Node n = new Node(d);
 		if (head == null) {
 			head = n;
@@ -64,7 +64,7 @@ public class LinkedList {
 	 	Append a new Node to the tail
 	 */
 
-	void appendToTail(Node n) {
+	public void appendToTail(Node n) {
 		if (head == null) {
 			head = n;
 			return;
@@ -81,7 +81,7 @@ public class LinkedList {
 	 * Create a new LinkedList from given int array
 	 */
 
-	void newNodeFromArray(int[] arr) {
+	public  void newNodeFromArray(int[] arr) {
 
 		this.head = new Node(arr[0]);
 		Node n = this.head;
@@ -95,7 +95,7 @@ public class LinkedList {
 	 * Append a new Node to the front or head
 	 */
 
-	void appendToFront(int data) {
+	public void appendToFront(int data) {
 		Node n = new Node(data);
 		if (head == null) {
 			head = n;
@@ -109,7 +109,7 @@ public class LinkedList {
 	 * Append a new Node to the front or head
 	 */
 
-	void appendToFront(Node n) {
+	public void appendToFront(Node n) {
 		if (head == null) {
 			head = n;
 			return;
@@ -122,7 +122,7 @@ public class LinkedList {
 	 * Print the LinkedList
 	 */
 
-	void printList() {
+	public void printList() {
 
 		System.out.print("LinkedList: ");
 		if (head == null) {
@@ -137,7 +137,7 @@ public class LinkedList {
 		System.out.println();
 	}
 
-	void printList(String msg, Node head) {
+	public void printList(String msg, Node head) {
 
 		System.out.print(msg);
 		if (head == null) {
@@ -152,7 +152,7 @@ public class LinkedList {
 		System.out.println();
 	}
 
-	int length(Node curr) {
+	public int length(Node curr) {
 
 		if (curr == null)
 			return 0;
@@ -163,14 +163,14 @@ public class LinkedList {
 	 * get the number of nodes in a linkedlist
 	 */
 
-	int length() {
+	public int length() {
 
 		return length(this.head);
 	}
 
 	/**************** LIST DS ALGO *************************/
 
-	/*
+	 /*
 	 * 1. Get the Middle Element Trick:
 	 */
 
@@ -182,7 +182,7 @@ public class LinkedList {
 	// 1->2->3->3->2->1
 	// 
 	
-	Node getMid(){
+	public Node getMid(){
 
 		if(head == null || head.next ==null)
 			return head;
@@ -209,7 +209,7 @@ public class LinkedList {
 	 * delete from heads seperately
 	 */
 
-	Node delete(int data) {
+	public Node delete(int data) {
 
 		// if the first node
 		if (head.data == data) {
@@ -235,7 +235,7 @@ public class LinkedList {
 	 * 3. Delete all occurrences and returns the head
 	 */
 
-	void deleteAll(int data) {
+	public void deleteAll(int data) {
 
 		// Delete all first occurrences
 		while (head.data == data) {
@@ -259,7 +259,7 @@ public class LinkedList {
 	 * 4. reverse all Logic: 1. For each node n, store the next and the prev
 	 * node 2. reverse links for n and update Boundary: 1. One or element array
 	 */
-	void reverse() {
+	public void reverse() {
 
 		if (head == null || head.next == null)
 			return; // only 0 or 1 elements
@@ -285,7 +285,7 @@ public class LinkedList {
 	 * prev and n, move prev ahead only if found a non dup element, else, prev
 	 */
 
-	void removeDups() {
+	public void removeDups() {
 
 		Set<Integer> set = new HashSet<>();
 		Node n = head;
@@ -317,7 +317,7 @@ public class LinkedList {
 			n.next (ie. c) = n.next.next;
  */
 
-	void removeMidNode(Node n){
+	public void removeMidNode(Node n){
 			if(n == null || n.next == null || n == head) //cant be a null, or last or first node
 				return;
 			n.data = n.next.data;
@@ -342,7 +342,7 @@ public class LinkedList {
 		3.Then move n till offset reacges end
 	 */
 
-	Node kthToLast(int k){
+	public Node kthToLast(int k){
 		if(head == null ) return null;
 		if(head.next == null ) {
 			return head;}
@@ -376,7 +376,7 @@ public class LinkedList {
 //	  p n
 //1 3 2 6
 //4 3 2 1 v=2
-	void partition(int v){
+	public void partition(int v){
 		if(head ==null || head.next == null){
 			return ;
 		}
@@ -430,7 +430,7 @@ public class LinkedList {
 	//	3 2 1 2 3					3 2 1      	2 3			3 2
 	//	1 2 3 4 4 3 2 1				1 2 3 4    	4 3 2 1		1 2 3 4
 	
-	boolean isPalindrome(){
+	public boolean isPalindrome(){
 
 		boolean isPalin = true;						// Need for the flag: if instead of setting the flag,
 														// you return straight, when LL is not a palindrome, 
@@ -536,7 +536,7 @@ public class LinkedList {
 	 
 	 
 	
-	void sortLLWithOnly0s_1s_2s(){
+	public void sortLLWithOnly0s_1s_2s(){
 
 		if (head == null || head.next == null)
 			return ;
@@ -650,7 +650,7 @@ public class LinkedList {
 
 	 */
 	
-	Node intersection(Node h2){
+	public Node intersection(Node h2){
 
 		if(this.head == null || h2 == null)
 			return null;
@@ -699,11 +699,11 @@ public class LinkedList {
 	}
 
 
-	static void println(Object a){
+	static public void println(Object a){
 		System.out.println((String)a);
 	}
 
-	static void print(Object a){
+	static public void print(Object a){
 		System.out.print((String)a);
 	}
 

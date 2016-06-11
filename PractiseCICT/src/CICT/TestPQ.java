@@ -1,10 +1,10 @@
-package CICT;
+
 
 public class TestPQ{
 
 	public static void main(String[] args) {
 		// MaxPQ.DEBUG = true;
-		MaxPQ<Integer> maxpq = new MaxPQ<>(new Integer[]{2,7,3,4,9,1});
+		MaxPQ<Integer> maxpq = new MaxPQ<Integer>(new Integer[]{2,7,3,4,9,1});
 		maxpq.printHeap();
 
 		//Delete Max

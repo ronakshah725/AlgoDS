@@ -1,18 +1,18 @@
-package CICT;
+
 	
 /*
 	In Place HeapSort
 	// build heap in bottom up fashion, up means use sink
  */
-class HeapSort<Key extends Comparable<Key>>{
+public class HeapSort<Key extends Comparable<Key>>{
 
-	Key[] max_heap;
+	public Key[] max_heap;
 	int N;
 
-	HeapSort(){
+	public HeapSort(){
 	}
 
-	void initHeap(Key[] ks){
+	public void initHeap(Key[] ks){
 		N = ks.length;
 		max_heap = ks;
 	
@@ -25,7 +25,7 @@ class HeapSort<Key extends Comparable<Key>>{
 		}
 	}
 
-	void sort(){
+	public void sort(){
 		this.buildMaxHeap();
 		while(N > 1 ){
 			exch(1,N--);
@@ -118,7 +118,7 @@ class HeapSort<Key extends Comparable<Key>>{
 	/*
 		Print max_heap by level order
 	 */
-	void printHeap(Key[] max_heap){
+	public void printHeap(Key[] max_heap){
 		print("Heap:\t");
 		for (int i = 0; i<max_heap.length; i++){
 			print(max_heap[i] + " ");

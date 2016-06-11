@@ -1,4 +1,4 @@
-package CICT;
+
 
 import java.util.Arrays;
 
@@ -39,7 +39,6 @@ public class HashTable{
 
 	//get
 	public Integer get(Integer key){
-		
 		LinkedList keyList = getLinkedList(key);
 		Node val = keyList.get(key) ;
 		return val!=null ? val.value : null;		

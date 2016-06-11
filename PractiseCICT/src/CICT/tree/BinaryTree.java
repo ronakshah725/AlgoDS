@@ -1,19 +1,23 @@
-package CICT.tree;
 
-class BinaryTree <Key extends Comparable<Key>>{
-	TreeNode<Key> root;
+class BinaryTree {
+	TreeNode root;
 
-	BinaryTree(TreeNode<Key> root){
+	BinaryTree(TreeNode root){
 		this.root = root;
 	}
 
-	BinaryTree(Key data){
-		TreeNode<Key> n = new TreeNode<Key>(data);
-		root = n;
-	}
 
+	BinaryTree(){}
+	
+//	public TreeNode makeTreeFromSortedIterative(int[]a){
+//		if (a.length == 0) 
+//			return null;
+//		int mid = a.len
+//		TreeNode n = new TreeNode()
+//		return null;
+//	}
 
-	void inorder(TreeNode<Key> root){
+	void inorder(TreeNode root){
 
 		if(root == null)
 			return;
@@ -25,7 +29,7 @@ class BinaryTree <Key extends Comparable<Key>>{
 	}
 
 
-	void preorder(TreeNode<Key> root){
+	void preorder(TreeNode root){
 
 		if(root == null)
 			return;
@@ -37,7 +41,7 @@ class BinaryTree <Key extends Comparable<Key>>{
 	}
 
 
-	void postorder(TreeNode<Key> root){
+	void postorder(TreeNode root){
 
 		if(root == null)
 			return;
@@ -47,6 +51,10 @@ class BinaryTree <Key extends Comparable<Key>>{
 		print(root.data + " ");
 
 	}
+	
+
+	
+	
 
 	static void println(Object a){
 		System.out.println(a.toString());
