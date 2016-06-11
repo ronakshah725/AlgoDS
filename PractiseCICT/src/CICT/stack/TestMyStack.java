@@ -1,7 +1,6 @@
 package CICT.stack;
 
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.Arrays;
 
 import CICT.AssortedMethods;
 
@@ -10,52 +9,22 @@ import CICT.AssortedMethods;
 public class TestMyStack{
 
 public static void main(String[] args) {
-		int[] array = AssortedMethods.randomArray(100, -100, 100);
-		MyStack<Integer> stack1 = new MyStack<Integer>();		
-		Stack<Integer> stack2 = new Stack<Integer>();
+		int[] array = AssortedMethods.randomArray(10, 0, 500);
+		System.out.println(Arrays.toString(array));
+		StackWithMin<Integer> stack1 = new StackWithMin<Integer>();		
 		
 		for (int a : array) {
-			if (a < 0) {
-				int top1, top2;
-				try {
-					top1 = stack1.pop();
-				} catch (EmptyStackException ex) {
-					top1 = Integer.MIN_VALUE;
-				}
-				try {
-					top2 = stack2.pop();
-				} catch (EmptyStackException ex) {
-					top2 = Integer.MIN_VALUE;
-				}
-				if (top1 != top2) {
-					System.out.println("ERROR: mismatching tops");
-				} else {
-					System.out.println("SUCCESS: matching tops: " + top1);
-				}
-			} else {
-				stack1.push(a);
-				stack2.push(a);
-			}
+		stack1.push(a);
+		}
+		stack1.push(54);
+		
+		while(!stack1.isEmpty()){
+			
+			System.out.println("Pop: " + stack1.peek() + ", Min: " + stack1.min());
+			stack1.pop();
 		}
 		
-		while (!stack1.isEmpty() || !stack2.isEmpty()) {
-			int top1, top2;
-			try {
-				top1 = stack1.pop();
-			} catch (EmptyStackException ex) {
-				top1 = Integer.MIN_VALUE;
-			}
-			try {
-				top2 = stack2.pop();
-			} catch (EmptyStackException ex) {
-				top2 = Integer.MIN_VALUE;
-			}
-			if (top1 != top2) {
-				System.out.println("ERROR: mismatching tops");
-			} else {
-				System.out.println("SUCCESS: matching tops: " + top1);
-			}
-		}
+	
 	}
 
 }
