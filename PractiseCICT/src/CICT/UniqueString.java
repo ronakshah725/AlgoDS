@@ -1,3 +1,4 @@
+package CICT;
 
 
 /*Problem: Find if string is unique

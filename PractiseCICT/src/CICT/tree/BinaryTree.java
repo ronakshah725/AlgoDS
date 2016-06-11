@@ -1,3 +1,4 @@
+package CICT.tree;
 
 class BinaryTree {
 	TreeNode root;
