@@ -2,24 +2,18 @@ package CICT.graph;
 
 import java.util.Stack;
 
-public class DepthFirstPaths extends Paths {
+public class Paths {
 	private final int s;
+	protected boolean[] marked ;
+	protected int[] edgeTo;
 	
-	public DepthFirstPaths(Graph g, int s)  {
-		super(g,s);
+	public Paths(Graph g, int s) {
 		this.s = s;
-		dfs(g,s);
+		marked = new boolean[g.V()];
+		edgeTo = new int[g.V()];
+		marked[s] = true;
 	}
 
-	public void dfs(Graph g, int v) {
-		marked[v] =true;
-		for (int w : g.adj(v))
-			if(!marked[w]){
-				edgeTo[w] = v;
-				dfs(g,w);
-				
-			}
-	}
 	
 	public boolean hasPathTo(int v) {
 		return marked[v];
@@ -38,5 +32,4 @@ public class DepthFirstPaths extends Paths {
 		 return path;
 		 
 	 }
-	
 }
