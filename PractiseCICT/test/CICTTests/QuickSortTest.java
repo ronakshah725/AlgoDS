@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
-import CICT.QuickSort;
+import CICT.sort.QuickSort;
 
 public class QuickSortTest {
 	static int[] a;

@@ -1,5 +1,6 @@
-package CICT;
+package CICT.sort.tests;
 
+import CICT.sort.MaxPQ;
 
 public class TestPQ{
 

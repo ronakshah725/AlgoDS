@@ -1,5 +1,6 @@
-package CICT;
+ package CICT.sort;
 
+import CICT.AssortedMethods;
 
 // {6,5,1,3,8,4,7,9,2};
 public class QuickSort {
@@ -34,5 +35,11 @@ public class QuickSort {
 		int temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
+	}
+
+	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
+		sort(AssortedMethods.randomArray(10000000, 1000000, 10000000));
+		System.out.println("Time:" + (System.currentTimeMillis() - start));
 	}
 }

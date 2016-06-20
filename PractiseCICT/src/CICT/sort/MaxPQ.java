@@ -1,4 +1,4 @@
-package CICT;
+package CICT.sort;
 
 
 
@@ -27,7 +27,7 @@ Binary Heap:
 
  */
 
-class MaxPQ<Key extends Comparable<Key>>{
+public class MaxPQ<Key extends Comparable<Key>>{
 	private static final int DEFAULT_CAPACITY = 50;
 	private int capacity;
 	private Key[] heap;
@@ -120,7 +120,7 @@ class MaxPQ<Key extends Comparable<Key>>{
 	/*
 		Size of PQ
 	 */
-	int size(){
+	public int size(){
 	
 		return N;
 	}
@@ -192,7 +192,7 @@ class MaxPQ<Key extends Comparable<Key>>{
 	/*
 		Print heap by level order
 	 */
-	void printHeap(){
+	public void printHeap(){
 		print("Heap:\t");
 		for (int i = 1; i<=N; i++){
 			print(heap[i] + " ");

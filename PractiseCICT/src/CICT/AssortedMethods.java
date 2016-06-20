@@ -1,4 +1,4 @@
-package CICT;
+ package CICT;
 
 public class AssortedMethods {
 	public static int randomInt(int n) {

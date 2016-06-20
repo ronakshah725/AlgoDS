@@ -1,6 +1,6 @@
 package CICTTests;
 
-import CICT.HeapSort;
+import CICT.sort.HeapSort;
 
 public class TestHeapSort{
 
